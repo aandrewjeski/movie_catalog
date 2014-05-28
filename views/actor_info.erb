@@ -1,0 +1,13 @@
+<head>
+    <title><%= params[:name] %></title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<h1><%= params[:name] %></h1>
+<% @actor_info.each do |actor| %>
+  <ol>
+    <a href="/actors/<%= "#{actor['name']}" %>"><%= "#{actor["name"]}" %></a>:
+    <%= actor['role'] %>
+  </ol>
+<% end %>
+</body>

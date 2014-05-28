@@ -26,17 +26,17 @@ get "/actors" do
 end
 
 get "/actors/:id" do
-  id = params[:id]
 
   db_connection do |conn|
     @actor_info = conn.exec_params(
-      'SELECT actor.name AS name, movies.title AS movie, cast_members.character
-      FROM actors
-      JOIN cast_members ON actors.id = cast_members.actor_id
+      "SELECT actors.name AS name, movies.title AS movie, cast_members.character AS role
+      FROM cast_members
+      JOIN actors ON actors.id = cast_members.actor_id
       JOIN movies ON cast_members.movie_id = movies.id
-      WHERE actors.id = #{params[:id]};')
+      WHERE actors.id = #{params[:id]};")
   end
   @actor_info = @actor_info.to_a
+  binding.pry
   erb :actor_info
 end
 
@@ -65,7 +65,6 @@ get "/movies/:id" do
       JOIN genres ON movies.genre_id = genres.id
       JOIN studios ON movies.studio_id = studios.id
       LIMIT 20;')
-    FROM movies WHERE id = $1, [id])
   end
   erb :movie_info
 end

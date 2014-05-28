@@ -2,14 +2,14 @@
     <title>Actors</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-</center>
+<body>
 <h1> Actor List </h1>
 <p>
 <ul>
   <% @actors.each do |actor| %>
-    <li><a href="/actors/:id"><%= "#{actor["name"]}" %></a>
+    <li><a href="/actors/<%= "#{actor['id']}" %>"><%= "#{actor["name"]}" %></a>
     </li>
   <% end %>
 </ul>
 </p>
-</center>
+</body>
